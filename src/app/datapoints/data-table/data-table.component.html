@@ -1,0 +1,13 @@
+<ul *ngFor="let point of points | async">
+  <li>
+    <strong>{{ point.checktype }} 
+      (<a href="#" (click)="deletePoint(point.id)">X</a>)
+      (<a href="#" (click)="updatePoint(point, point.id)">Update</a>)
+    </strong>
+    <br>
+    {{ point.value }}
+    <br>
+    {{ point.date }}
+  </li>
+</ul>
+

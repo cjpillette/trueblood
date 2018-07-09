@@ -1,0 +1,14 @@
+<form [formGroup]="pointForm">
+  <label for="checktype">Type de donnee</label>
+  <input type="text" name="checktype" formControlName="checktype" placeholder="checktype">
+  <br>
+  <label for="value">Valeur enregistree</label>
+  <input type="number" formControlName="value" placeholder="value" name="value">
+  <br>
+  <label for="date">Date</label>
+  <input type="date" formControlName="date" placeholder="date" name="date">
+
+  <input type="submit" value="Sauvegarder" (click)="this.pointId ? editPoint(pointForm.value, pointId) : addPoint(pointForm.value)">
+  <input type="button" value="Reset" (click)="clearForm()">
+
+</form>
