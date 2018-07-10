@@ -4,12 +4,12 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 
 import { Point, PointId } from './data-points.model';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthService } from '../core/auth.service';
 
 @Injectable()
 export class DataPointsService {
@@ -21,17 +21,20 @@ export class DataPointsService {
   modPoint = new BehaviorSubject<any>(null);
   magic = '';
 
-  constructor(private afs: AngularFirestore, private authService: AuthService) {
-    this.pointsCollection = this.afs.collection('blood', ref => ref.where('userId', '==', this.magic).orderBy('date', 'asc'));
-    this.points = this.pointsCollection.snapshotChanges()
-    .pipe(map(action => {
-      return action.map(a => {
-        const data = a.payload.doc.data();
-        data.date = new Date(data.date['seconds'] * 1000 );
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    }));
+  constructor(private afs: AngularFirestore) {
+    const user = firebase.auth().currentUser;
+    if (user) {
+      this.pointsCollection = this.afs.collection('blood', ref => ref.where('userId', '==', user.uid).orderBy('date', 'asc'));
+      this.points = this.pointsCollection.snapshotChanges()
+      .pipe(map(action => {
+        return action.map(a => {
+          const data = a.payload.doc.data();
+          data.date = new Date(data.date['seconds'] * 1000 );
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      }));
+    }
   }
 
   getPoints() {
