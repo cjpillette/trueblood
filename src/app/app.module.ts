@@ -15,6 +15,7 @@ import { DataTableComponent } from './datapoints/data-table/data-table.component
 import { DataPointsService } from './datapoints/data-points.service';
 import { DataChartComponent } from './datapoints/data-chart/data-chart.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     DataTableComponent,
     DataChartComponent,
     UserProfileComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     CoreModule,
     RouterModule.forRoot(
       [
-        { path: '', component: UserProfileComponent}
+        { path: '', component: UserProfileComponent},
+        { path: 'dashboard', component: DashboardComponent}
       ])
   ],
   providers: [DataPointsService],
