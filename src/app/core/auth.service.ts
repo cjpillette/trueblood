@@ -53,6 +53,12 @@ export class AuthService {
       photoURL: user.photoURL
     };
 
-    return userRef.set(data);
+    return userRef.set(data, {merge: true});
+  }
+
+  signOut() {
+    this.afAuth.auth.signOut().then(() => {
+        this.router.navigate(['/']);
+    });
   }
 }

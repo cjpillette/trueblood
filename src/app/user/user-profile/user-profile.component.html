@@ -14,4 +14,5 @@
     <img [src]="user.photoURL">
     <p>UID: {{ user.uid}}</p>
   </div>
+  <button (click)="auth.signOut()">Sign Out</button>
 </ng-template>
