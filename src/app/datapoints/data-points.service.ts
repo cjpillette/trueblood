@@ -9,6 +9,7 @@ import { Point, PointId } from './data-points.model';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../core/auth.service';
 
 @Injectable()
 export class DataPointsService {
@@ -18,9 +19,10 @@ export class DataPointsService {
   point: Observable<Point>;
   editing = false;
   modPoint = new BehaviorSubject<any>(null);
+  magic = '';
 
-  constructor(private afs: AngularFirestore) {
-    this.pointsCollection = this.afs.collection('blood', ref => ref.orderBy('date', 'asc'));
+  constructor(private afs: AngularFirestore, private authService: AuthService) {
+    this.pointsCollection = this.afs.collection('blood', ref => ref.where('userId', '==', this.magic).orderBy('date', 'asc'));
     this.points = this.pointsCollection.snapshotChanges()
     .pipe(map(action => {
       return action.map(a => {
