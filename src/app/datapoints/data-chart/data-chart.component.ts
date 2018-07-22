@@ -15,7 +15,16 @@ export class DataChartComponent implements OnInit {
   hemUpper = 6;
   hemLower = 4;
 
-  lineChartColors: Array<any> = [
+  lineChartOptions = {
+    scales: {
+      xAxes: [{
+          type: 'time',
+          distribution: 'linear'
+      }]
+  }
+  };
+
+  lineChartColors = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0)',
       borderColor: 'rgba(148,159,177,1)',
