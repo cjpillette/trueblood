@@ -19,7 +19,6 @@ export class DataPointsService {
   point: Observable<Point>;
   editing = false;
   modPoint = new BehaviorSubject<any>(null);
-  magic = '';
 
   constructor(private afs: AngularFirestore) {
     const user = firebase.auth().currentUser;

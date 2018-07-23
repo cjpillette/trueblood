@@ -1,6 +1,13 @@
 <form [formGroup]="pointForm">
   <label for="checktype">Type de donnee</label>
-  <input type="text" name="checktype" formControlName="checktype" placeholder="checktype">
+  <input type="radio" name="checktype" formControlName="checktype" value="HEM">HEM
+  <input type="radio" name="checktype" formControlName="checktype" value="HGLB">HGLB
+  <input type="radio" name="checktype" formControlName="checktype" value="HTRC">HTRC
+  <input type="radio" name="checktype" formControlName="checktype" value="VGM">VGM
+  <input type="radio" name="checktype" formControlName="checktype" value="TCMH">TCMH
+  <input type="radio" name="checktype" formControlName="checktype" value="CCMH">CCMH
+  <input type="radio" name="checktype" formControlName="checktype" value="Ferrite">Ferrite
+  <input type="radio" name="checktype" formControlName="checktype" value="Fer serique">Fer serique
   <br>
   <label for="value">Valeur enregistree</label>
   <input type="number" formControlName="value" placeholder="value" name="value">

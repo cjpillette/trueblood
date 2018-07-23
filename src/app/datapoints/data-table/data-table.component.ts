@@ -9,11 +9,13 @@ import { Point, PointId } from '../data-points.model';
 })
 export class DataTableComponent implements OnInit {
   points: any;
+  userId: string;
 
   constructor(private dataPointsService: DataPointsService) { }
 
   ngOnInit() {
     this.points = this.dataPointsService.getPoints();
+    this.userId = localStorage.getItem('userUID');
   }
 
   deletePoint(pointId: PointId) {
