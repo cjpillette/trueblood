@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatButtonModule, MatCardModule, MatRadioModule, MatDatepickerModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatCardModule, MatRadioModule, MatDatepickerModule, MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { MatInputModule, MatButtonModule, MatCardModule, MatRadioModule, MatDate
     MatCardModule,
     MatRadioModule,
     MatDatepickerModule
-  ]
+  ],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}]
 })
 export class MaterialModule {
 }

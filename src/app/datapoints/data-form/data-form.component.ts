@@ -69,8 +69,4 @@ export class DataFormComponent implements OnInit {
     });
   }
 
-  test() {
-    console.log('form', this.pointForm.get('date').value, this.pointForm.get('value').value, this.pointForm.get('checktype').value , localStorage.getItem('userUID'));
-  }
-
 }
