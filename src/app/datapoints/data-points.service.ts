@@ -40,17 +40,23 @@ export class DataPointsService {
     return this.points;
   }
 
+  getFullDataPoint(point: Point) {
+    const fullDataPoint = {
+      ...point,
+      userId: localStorage.getItem('userUID')
+    };
+    fullDataPoint.date = new Date(fullDataPoint.date);
+    return fullDataPoint;
+  }
+
   addPoint(point: Point) {
-    const formattedPoint = { ...point};
-    formattedPoint.date = new Date(formattedPoint.date);
-    this.afs.collection('blood').add(formattedPoint);
+    this.afs.collection('blood')
+      .add(this.getFullDataPoint(point));
   }
 
   updatePoint(point: Point, pointId: PointId) {
     this.pointDoc = this.afs.doc('blood/' + pointId);
-    const formattedPoint = { ...point};
-    formattedPoint.date = new Date(formattedPoint.date);
-    this.pointDoc.update(formattedPoint);
+    this.pointDoc.update(this.getFullDataPoint(point));
   }
 
   editPoint(point: Point, pointId: PointId) {

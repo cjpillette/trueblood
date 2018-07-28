@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DataPointsService } from './../data-points.service';
 import { Point, PointId } from '../data-points.model';
+import { AuthService } from './../../core/auth.service';
 
 @Component({
   selector: 'app-data-form',
@@ -12,9 +13,8 @@ export class DataFormComponent implements OnInit {
   pointForm: FormGroup;
   pointId: string;
   bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
-  checked = 'HEM';
 
-  constructor(private fb: FormBuilder, private dataPointsService: DataPointsService) { }
+  constructor(private fb: FormBuilder, private dataPointsService: DataPointsService) {}
 
   ngOnInit() {
     this.pointForm = this.fb.group({
@@ -70,7 +70,7 @@ export class DataFormComponent implements OnInit {
   }
 
   test() {
-    console.log('form', this.pointForm.get('date').value, this.pointForm.get('value').value, this.pointForm.get('checktype').value );
+    console.log('form', this.pointForm.get('date').value, this.pointForm.get('value').value, this.pointForm.get('checktype').value , localStorage.getItem('userUID'));
   }
 
 }
