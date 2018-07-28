@@ -11,6 +11,8 @@ import { Point, PointId } from '../data-points.model';
 export class DataFormComponent implements OnInit {
   pointForm: FormGroup;
   pointId: string;
+  bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
+  checked = 'HEM';
 
   constructor(private fb: FormBuilder, private dataPointsService: DataPointsService) { }
 
@@ -65,6 +67,10 @@ export class DataFormComponent implements OnInit {
       'value': null,
       'date': null
     });
+  }
+
+  test() {
+    console.log('form', this.pointForm.get('date').value, this.pointForm.get('value').value, this.pointForm.get('checktype').value );
   }
 
 }

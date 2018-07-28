@@ -1,0 +1,14 @@
+.icon {
+  max-width: 60x;
+  max-height: 60px;
+  border-radius: 30px; 
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.welcome {
+  padding-right: 10px;
+}

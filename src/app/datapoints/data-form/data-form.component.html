@@ -1,21 +1,32 @@
-<form [formGroup]="pointForm">
-  <label for="checktype">Type de donnee</label>
-  <input type="radio" name="checktype" formControlName="checktype" value="HEM">HEM
-  <input type="radio" name="checktype" formControlName="checktype" value="HGLB">HGLB
-  <input type="radio" name="checktype" formControlName="checktype" value="HTRC">HTRC
-  <input type="radio" name="checktype" formControlName="checktype" value="VGM">VGM
-  <input type="radio" name="checktype" formControlName="checktype" value="TCMH">TCMH
-  <input type="radio" name="checktype" formControlName="checktype" value="CCMH">CCMH
-  <input type="radio" name="checktype" formControlName="checktype" value="Ferrite">Ferrite
-  <input type="radio" name="checktype" formControlName="checktype" value="Fer serique">Fer serique
-  <br>
-  <label for="value">Valeur enregistree</label>
-  <input type="number" formControlName="value" placeholder="value" name="value">
-  <br>
-  <label for="date">Date</label>
-  <input type="date" formControlName="date" placeholder="date" name="date">
+<mat-card>
+  <form [formGroup]="pointForm">
+    <label for="checktype">Type de donnee</label><br>
+    <mat-radio-group formControlName="checktype">
+      <mat-radio-button 
+        *ngFor="let check of bloodChecks" 
+        name="checktype"  
+        [value]="check"
+      >
+        {{check}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-form-field>
+      <input matInput type="number" formControlName="value" placeholder="Valeur enregistree" name="value">
+    </mat-form-field>
+    <br>
+    
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date"formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br>
+  
+    <button mat-raised-button value="Sauvegarder" color="accent" (click)="this.pointId ? editPoint(pointForm.value, pointId) : addPoint(pointForm.value)">Sauvegarder</button>
+      
+    <button mat-raised-button value="Reset" (click)="clearForm()">Reset</button>
 
-  <input type="submit" value="Sauvegarder" (click)="this.pointId ? editPoint(pointForm.value, pointId) : addPoint(pointForm.value)">
-  <input type="button" value="Reset" (click)="clearForm()">
-
-</form>
+    <button mat-raised-button value="Reset" (click)="test()">Test</button>
+  </form>
+</mat-card>
