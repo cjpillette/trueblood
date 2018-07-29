@@ -19,6 +19,7 @@ import { DataChartComponent } from './datapoints/data-chart/data-chart.component
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material';
+import { OignonComponent } from './oignon/oignon.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatNativeDateModule } from '@angular/material';
     DataChartComponent,
     UserProfileComponent,
     UserProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    OignonComponent
   ],
   imports: [
     BrowserModule,

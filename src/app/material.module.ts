@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatButtonModule, MatCardModule, MatRadioModule, MatDatepickerModule, MAT_DATE_LOCALE } from '@angular/material';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatCardModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MAT_DATE_LOCALE,
+  MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -9,16 +16,22 @@ import { MatInputModule, MatButtonModule, MatCardModule, MatRadioModule, MatDate
     MatButtonModule,
     MatCardModule,
     MatRadioModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
   ],
   exports: [
     MatInputModule,
     MatButtonModule,
     MatCardModule,
     MatRadioModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}]
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}],
 })
 export class MaterialModule {
 }

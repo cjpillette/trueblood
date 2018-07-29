@@ -1,14 +1,38 @@
-<h3>{{ userId }}</h3>
+<!-- <h3>HEM</h3>
 <ul *ngFor="let point of points | async">
   <li>
-    <strong>{{ point.checktype }} 
       <div (click)="deletePoint(point.id)">X</div>
       <div (click)="updatePoint(point, point.id)">Update</div>
-    </strong>
     <br>
     {{ point.value }}
     <br>
     {{ point.date | date:'MM/yyyy'}}
   </li>
-</ul>
+</ul> -->
+
+<div class="mat-elevation-z8">
+  <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let row">{{row.date | date:'MM/yyyy'}}</td>
+    </ng-container>
+
+    <!-- Value Column -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Valeur enregistree</th>
+      <td mat-cell *matCellDef="let row">{{row.value}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 50, 100]">
+  </mat-paginator>
+</div>
 
