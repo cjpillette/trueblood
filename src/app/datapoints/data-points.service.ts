@@ -23,7 +23,7 @@ export class DataPointsService {
   constructor(private afs: AngularFirestore) {
     const user = firebase.auth().currentUser;
     if (user) {
-      this.pointsCollection = this.afs.collection('blood', ref => ref.where('userId', '==', user.uid).orderBy('date', 'asc'));
+      this.pointsCollection = this.afs.collection(`blood`, ref => ref.where('userId', '==', user.uid).orderBy('date', 'desc'));
       this.points = this.pointsCollection.snapshotChanges()
       .pipe(map(action => {
         return action.map(a => {
