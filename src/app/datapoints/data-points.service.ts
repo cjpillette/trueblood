@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class DataPointsService {
   pointsCollection: AngularFirestoreCollection<Point>;
-  points: any;
+  points: Observable<Point[]>;
   pointDoc: AngularFirestoreDocument<Point>;
   point: Observable<Point>;
   editing = false;

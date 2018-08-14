@@ -15,13 +15,12 @@ export class DataTableComponent implements OnInit {
   dataSource: PointsDataSource;
   points: any;
   userId: string;
-  displayedColumns = ['date', 'value'];
+  displayedColumns = ['date', 'value', 'update', 'delete'];
 
   constructor(private dataPointsService: DataPointsService) { }
 
   ngOnInit() {
-    this.dataSource = new PointsDataSource(this.paginator, this.sort);
-    this.points = this.dataPointsService.getPoints();
+    this.dataSource = new PointsDataSource(this.dataPointsService);
     this.userId = localStorage.getItem('userUID');
   }
 
@@ -31,6 +30,14 @@ export class DataTableComponent implements OnInit {
 
   updatePoint(point: Point, pointId: PointId) {
     this.dataPointsService.editPoint(point, pointId);
+  }
+
+  updateTest(point) {
+    console.log('update test', point);
+  }
+
+  deleteTest(point) {
+    console.log('delete test', point);
   }
 
 }
