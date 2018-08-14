@@ -1,4 +1,6 @@
 <div class="mat-elevation-z8">
+  <mat-spinner *ngIf="dataSource.loading$ | async"></mat-spinner>
+
   <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
     <!-- Date Column -->
     <ng-container matColumnDef="date">

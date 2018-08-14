@@ -7,7 +7,8 @@ import {
   MatRadioModule,
   MatDatepickerModule,
   MAT_DATE_LOCALE,
-  MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+  MatTableModule, MatPaginatorModule, MatSortModule,
+  MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatInputModule,
@@ -30,6 +32,7 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}],
 })
