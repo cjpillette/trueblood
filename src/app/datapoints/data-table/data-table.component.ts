@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Point, PointId } from '../data-points.model';
-import { DataPointsService } from './../data-points.service';
+import { DataPointsService } from '../data-points.service';
 import { PointsDataSource } from './data-datasource';
 
 @Component({

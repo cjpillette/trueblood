@@ -50,6 +50,7 @@ import { OignonComponent } from './oignon/oignon.component';
       ])
   ],
   providers: [DataPointsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DataFormComponent]
 })
 export class AppModule { }

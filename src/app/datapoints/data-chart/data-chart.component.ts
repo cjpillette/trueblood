@@ -1,4 +1,4 @@
-import { DataPointsService } from './../data-points.service';
+import { DataPointsService } from '../data-points.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

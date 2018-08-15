@@ -1,8 +1,8 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { DataPointsService } from './../data-points.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DataPointsService } from '../data-points.service';
 import { Point, PointId } from '../data-points.model';
-import { AuthService } from './../../core/auth.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-data-form',
@@ -14,7 +14,12 @@ export class DataFormComponent implements OnInit {
   pointId: string;
   bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
 
-  constructor(private fb: FormBuilder, private dataPointsService: DataPointsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private dataPointsService: DataPointsService,
+    private dialogRef: MatDialogRef<DataFormComponent>,
+        @Inject(MAT_DIALOG_DATA) data
+  ) {}
 
   ngOnInit() {
     this.pointForm = this.fb.group({
@@ -67,6 +72,14 @@ export class DataFormComponent implements OnInit {
       'value': null,
       'date': null
     });
+  }
+
+  save() {
+    this.dialogRef.close(this.pointForm.value);
+  }
+
+  close() {
+      this.dialogRef.close();
   }
 
 }

@@ -1,9 +1,9 @@
-import { Point } from './../data-points.model';
+import { Point } from '../data-points.model';
 import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map, finalize, catchError, take } from 'rxjs/operators';
 import { Observable, merge, BehaviorSubject, of } from 'rxjs';
-import { DataPointsService } from './../data-points.service';
+import { DataPointsService } from '../data-points.service';
 
 export class PointsDataSource extends DataSource<Point> {
   pointsSubject = new BehaviorSubject<Point[]>([]);

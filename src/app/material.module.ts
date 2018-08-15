@@ -10,7 +10,8 @@ import {
   MAT_DATE_LOCALE,
   MatTableModule, MatPaginatorModule, MatSortModule,
   MatProgressSpinnerModule,
-  MatIconModule } from '@angular/material';
+  MatIconModule,
+  MatDialogModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
     MatInputModule,
@@ -38,7 +40,8 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}],
 })
