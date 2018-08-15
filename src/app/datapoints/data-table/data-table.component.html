@@ -36,7 +36,7 @@
   </table>
 
   <mat-paginator #paginator
-    [length]="32"
+    [length]="dataSource.data.length"
     [pageIndex]="0"
     [pageSize]="10"
     [pageSizeOptions]="[10, 25, 50]">

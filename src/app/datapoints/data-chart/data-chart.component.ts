@@ -12,8 +12,8 @@ export class DataChartComponent implements OnInit {
   valuePoints: Array<number>;
   checkType: string;
   isDataAvailable = false;
-  hemUpper = 6;
-  hemLower = 4;
+  unit: string;
+  title = 'HEM';
 
   lineChartOptions = {
     scales: {
@@ -60,7 +60,8 @@ export class DataChartComponent implements OnInit {
         const datePoints = val.map(a => a.date);
         const upperLimit = val.map(a => a.upperLimit);
         const lowerLimit = val.map(a => a.lowerLimit);
-        const unit = val.map(a => a.unit);
+        const unitArray = val.map(a => a.unit);
+        this.unit = Array.from(new Set(unitArray)).join(' ');
 
         this.lineChartData = [
           {data: this.valuePoints},

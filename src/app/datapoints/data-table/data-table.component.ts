@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Point, PointId } from '../data-points.model';
 import { DataPointsService } from './../data-points.service';
@@ -9,7 +9,7 @@ import { PointsDataSource } from './data-datasource';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: PointsDataSource;
@@ -31,8 +31,13 @@ export class DataTableComponent implements OnInit {
   constructor(private dataPointsService: DataPointsService) { }
 
   ngOnInit() {
-    this.dataSource = new PointsDataSource(this.dataPointsService);
+    this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort);
     // this.userId = localStorage.getItem('userUID');
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   deletePoint(pointId: PointId) {
