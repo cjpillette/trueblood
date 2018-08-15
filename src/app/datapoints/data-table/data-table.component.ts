@@ -17,11 +17,22 @@ export class DataTableComponent implements OnInit {
   userId: string;
   displayedColumns = ['date', 'value', 'update', 'delete'];
 
+  bloodChecks = [
+    { name: 'HEM', checked: false },
+    { name: 'HGLB', checked: false },
+    { name: 'HTRC', checked: false },
+    { name: 'VGM', checked: false },
+    { name: 'TCMH', checked: false },
+    { name: 'CCMH', checked: false },
+    { name: 'Ferrite', checked: false },
+    { name: 'Fer serique', checked: false }
+  ];
+
   constructor(private dataPointsService: DataPointsService) { }
 
   ngOnInit() {
     this.dataSource = new PointsDataSource(this.dataPointsService);
-    this.userId = localStorage.getItem('userUID');
+    // this.userId = localStorage.getItem('userUID');
   }
 
   deletePoint(pointId: PointId) {

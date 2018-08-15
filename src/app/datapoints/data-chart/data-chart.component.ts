@@ -58,14 +58,14 @@ export class DataChartComponent implements OnInit {
       val => {
         this.valuePoints = val.map(a => a.value);
         const datePoints = val.map(a => a.date);
-        const upperLimit = val.map(a => this.hemUpper);
-        const lowerLimit = val.map(a => this.hemLower);
-        const checktypePoints = val.map(a => a.checktype);
-        this.checkType = Array.from(new Set(checktypePoints)).join(' ');
+        const upperLimit = val.map(a => a.upperLimit);
+        const lowerLimit = val.map(a => a.lowerLimit);
+        const unit = val.map(a => a.unit);
+
         this.lineChartData = [
-          {data: this.valuePoints, label: this.checkType},
-          {data: upperLimit, label: 'Upper'},
-          {data: lowerLimit, label: 'Lower'}
+          {data: this.valuePoints},
+          {data: upperLimit},
+          {data: lowerLimit}
         ];
         this.lineChartLabels = datePoints;
         this.isDataAvailable = true; // only now can you paint the chart

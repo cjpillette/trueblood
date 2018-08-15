@@ -1,3 +1,8 @@
+<mat-checkbox
+  *ngFor="let check of bloodChecks" 
+  class="example-margin" 
+  [checked]="check.checked">{{ check.name }}</mat-checkbox>
+
 <div class="mat-elevation-z8">
   <mat-spinner *ngIf="dataSource.loading$ | async"></mat-spinner>
 

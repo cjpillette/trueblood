@@ -14,16 +14,19 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class DataPointsService {
   pointsCollection: AngularFirestoreCollection<Point>;
+  limits: Observable<any>;
   points: Observable<Point[]>;
   pointDoc: AngularFirestoreDocument<Point>;
   point: Observable<Point>;
   editing = false;
   modPoint = new BehaviorSubject<any>(null);
+  user: any;
 
   constructor(private afs: AngularFirestore) {
-    const user = firebase.auth().currentUser;
-    if (user) {
-      this.pointsCollection = this.afs.collection(`blood`, ref => ref.where('userId', '==', user.uid).orderBy('date', 'desc'));
+    this.user = firebase.auth().currentUser;
+    if (this.user) {
+      this.pointsCollection = this.afs
+      .collection(`users/${this.user.uid}/blood/hem/results`, ref => ref.orderBy('date', 'desc'));
       this.points = this.pointsCollection.snapshotChanges()
       .pipe(map(action => {
         return action.map(a => {
@@ -55,7 +58,7 @@ export class DataPointsService {
   }
 
   updatePoint(point: Point, pointId: PointId) {
-    this.pointDoc = this.afs.doc('blood/' + pointId);
+    this.pointDoc = this.afs.doc('users/${this.user.uid}/blood/hem/results/' + pointId);
     this.pointDoc.update(this.getFullDataPoint(point));
   }
 
@@ -65,6 +68,6 @@ export class DataPointsService {
   }
 
   deletePoint(pointId) {
-    this.afs.doc('blood/' + pointId).delete();
+    this.afs.doc('users/${this.user.uid}/blood/hem/results/' + pointId).delete();
   }
 }
