@@ -28,14 +28,19 @@ export class PointsDataSource extends DataSource<Point> {
 
   connect(): Observable<Point[]> {
     const displayDataChanges = [
+      this.pointsSubject.asObservable(),
       this.sort.sortChange,
       this.paginator.page
     ];
     this.paginator.length = this.data.length;
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-    return this.pointsSubject.asObservable();
+    // return this.pointsSubject.asObservable();
+    return merge(...displayDataChanges).pipe(map(() => {
+      return this.getPagedData(this.getSortedData([...this.data]));
+    }));
   }
 
   disconnect() {
@@ -43,5 +48,29 @@ export class PointsDataSource extends DataSource<Point> {
     this.loadingSubject.complete();
   }
 
+  private getPagedData(data: Point[]) {
+    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+    return data.splice(startIndex, this.paginator.pageSize);
+  }
+
+  private getSortedData(data: Point[]) {
+    if (!this.sort.active || this.sort.direction === '') {
+      return data;
+    }
+
+    return data.sort((a, b) => {
+      const isAsc = this.sort.direction === 'asc';
+      switch (this.sort.active) {
+        case 'date': return compare(a.date, b.date, isAsc);
+        case 'value': return compare(+a.value, +b.value, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
