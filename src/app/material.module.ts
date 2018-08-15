@@ -9,7 +9,8 @@ import {
   MatDatepickerModule,
   MAT_DATE_LOCALE,
   MatTableModule, MatPaginatorModule, MatSortModule,
-  MatProgressSpinnerModule } from '@angular/material';
+  MatProgressSpinnerModule,
+  MatIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   exports: [
     MatInputModule,
@@ -35,7 +37,8 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}],
 })
