@@ -81,14 +81,11 @@ export class DataFormComponent implements OnInit {
 
   addPoint(point: Point) {
     this.dataPointsService.addPoint(point);
+    this.dialogRef.close();
   }
 
   editPoint(point: Point, pointId: PointId) {
     this.dataPointsService.updatePoint(point, pointId);
-  }
-
-  save() {
-    this.dialogRef.close(this.pointForm.value);
   }
 
   close() {

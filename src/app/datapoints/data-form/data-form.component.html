@@ -42,8 +42,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button value="Sauvegarder" color="accent" (click)="this.pointId ? editPoint(pointForm.value, pointId) : addPoint(pointForm.value)">Sauvegarder</button>    
-    <button mat-raised-button value="Reset" (click)="clearForm()">Reset</button>
-    <button mat-raised-button value="Save" (click)="save()">Save</button>
     <button mat-raised-button value="Close" (click)="close()">Close</button>
 </mat-dialog-actions>
 
