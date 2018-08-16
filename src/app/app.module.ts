@@ -20,6 +20,7 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material';
 import { OignonComponent } from './oignon/oignon.component';
+import { DialogService } from './datapoints/dialog.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { OignonComponent } from './oignon/oignon.component';
         { path: 'dashboard', component: DashboardComponent}
       ])
   ],
-  providers: [DataPointsService],
+  providers: [DataPointsService, DialogService],
   bootstrap: [AppComponent],
   entryComponents: [DataFormComponent]
 })

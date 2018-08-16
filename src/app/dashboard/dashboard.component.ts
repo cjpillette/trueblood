@@ -1,6 +1,6 @@
 import { DataFormComponent } from './../datapoints/data-form/data-form.component';
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { DialogService } from './../datapoints/dialog.service';
 
 
 @Component({
@@ -10,27 +10,13 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor( public dialog: MatDialog) { }
+  constructor( private dialogService: DialogService) { }
 
   ngOnInit() {
   }
 
   openDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {
-      date: new Date()
-    };
-
-    const dialogRef = this.dialog.open(DataFormComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-        // data => console.log('i was closed and data is', data)
-        data => data
-    );
-}
+    this.dialogService.openDialog(DataFormComponent);
+  }
 
 }
