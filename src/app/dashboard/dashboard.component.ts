@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(DataFormComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-        data => console.log('i was closed')
+        data => console.log('i was closed and data is', data)
     );
 }
 
