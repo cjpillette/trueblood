@@ -1,13 +1,7 @@
-Show me data for:
-<mat-checkbox
-  *ngFor="let check of bloodChecks" 
-  class="example-margin" 
-  [checked]="check.checked">{{ check.name }}</mat-checkbox>
-
 <mat-spinner *ngIf="dataSource.loading$ | async"></mat-spinner>
 
 <mat-card>
-  <mat-card-header>HEM</mat-card-header>
+  <mat-card-header>{{ collection | uppercase }}</mat-card-header>
   <mat-card-content>
     <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
       <!-- Date Column -->

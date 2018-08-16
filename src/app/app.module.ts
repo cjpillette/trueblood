@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material';
 import { OignonComponent } from './oignon/oignon.component';
 import { DialogService } from './datapoints/dialog.service';
+import { DataTablesListComponent } from './datapoints/data-tables-list/data-tables-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DialogService } from './datapoints/dialog.service';
     UserProfileComponent,
     UserProfileComponent,
     DashboardComponent,
-    OignonComponent
+    OignonComponent,
+    DataTablesListComponent
   ],
   imports: [
     BrowserModule,

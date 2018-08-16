@@ -11,9 +11,11 @@ export class PointsDataSource extends DataSource<Point> {
 
   public loading$ = this.loadingSubject.asObservable();
 
-  constructor( private dataPointsService: DataPointsService, public paginator: MatPaginator, public sort: MatSort) {
+  constructor(
+    private dataPointsService: DataPointsService, public paginator: MatPaginator, public sort: MatSort, private collection: string
+  ) {
     super();
-    this.dataPointsService.readPointsOf('hem')
+    this.dataPointsService.readPointsOf(collection)
     .pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false)))

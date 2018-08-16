@@ -15,26 +15,13 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: PointsDataSource;
-  points: any;
-  userId: string;
   displayedColumns = ['date', 'value', 'update', 'delete'];
-
-  bloodChecks = [
-    { name: 'HEM', checked: false },
-    { name: 'HGLB', checked: false },
-    { name: 'HTRC', checked: false },
-    { name: 'VGM', checked: false },
-    { name: 'TCMH', checked: false },
-    { name: 'CCMH', checked: false },
-    { name: 'Ferrite', checked: false },
-    { name: 'Fer serique', checked: false }
-  ];
+  collection = 'hem';
 
   constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) { }
 
   ngOnInit() {
-    this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort);
-    // this.userId = localStorage.getItem('userUID');
+    this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort, this.collection);
   }
 
   ngAfterViewInit() {
@@ -43,13 +30,12 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   }
 
   deletePoint(point: Point) {
-    // fix
-    // this.dataPointsService.deletePoint(pointId);
+    // fix - reimplement delete
   }
 
   updatePoint(point: Point) {
     this.dialogService.openDialog(DataFormComponent, point);
-    // this.dataPointsService.editPoint(point, pointId);
+    // check it rewrites ok in firestore
   }
 
 }

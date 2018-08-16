@@ -12,7 +12,7 @@ export class DialogService {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    if (withData) {
+    if (withData) { // in editing data mode
       dialogConfig.data = {
         id: withData.id,
         date: withData.date,
