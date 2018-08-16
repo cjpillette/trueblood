@@ -54,7 +54,7 @@ export class DataChartComponent implements OnInit {
   lineChartType = 'line';
 
   constructor(private dataPointsService: DataPointsService) {
-    this.dataPointsService.getPoints().subscribe(
+    this.dataPointsService.readPointsOf('hem').subscribe(
       val => {
         this.valuePoints = val.map(a => a.value);
         const datePoints = val.map(a => a.date);

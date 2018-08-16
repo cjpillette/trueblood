@@ -13,7 +13,7 @@ export class PointsDataSource extends DataSource<Point> {
 
   constructor( private dataPointsService: DataPointsService, public paginator: MatPaginator, public sort: MatSort) {
     super();
-    this.dataPointsService.getPoints()
+    this.dataPointsService.readPointsOf('hem')
     .pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false)))

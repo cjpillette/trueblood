@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { DataPointsService } from '../data-points.service';
-import { Point, PointId } from '../data-points.model';
+import { Point } from '../data-points.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
@@ -49,7 +49,7 @@ export class DataFormComponent implements OnInit {
   displayLimits(): void {
     this.pointForm.get('checktype').valueChanges.subscribe(val => {
       this.dataPointsService
-        .getSinglePointOf(val)
+        .readSinglePointOf(val)
         .subscribe(point => {
           const pt = Object.assign({}, ...point);
           return this.pointForm.patchValue({

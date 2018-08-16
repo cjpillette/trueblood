@@ -9,6 +9,3 @@ export interface Point {
   id?: string;
 }
 
-export interface PointId extends Point {
-  id: string;
-}

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { Point, PointId } from '../data-points.model';
+import { Point } from '../data-points.model';
 import { DataPointsService } from '../data-points.service';
 import { PointsDataSource } from './data-datasource';
 import { DialogService } from './../dialog.service';
@@ -42,21 +42,14 @@ export class DataTableComponent implements OnInit , AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  deletePoint(pointId: PointId) {
-    this.dataPointsService.deletePoint(pointId);
+  deletePoint(point: Point) {
+    // fix
+    // this.dataPointsService.deletePoint(pointId);
   }
 
   updatePoint(point: Point) {
     this.dialogService.openDialog(DataFormComponent, point);
     // this.dataPointsService.editPoint(point, pointId);
-  }
-
-  updateTest(point) {
-    console.log('update test', point);
-  }
-
-  deleteTest(point) {
-    console.log('delete test', point);
   }
 
 }
