@@ -5,7 +5,7 @@
       <mat-radio-button 
         *ngFor="let check of bloodChecks" 
         name="checktype"  
-        [value]="check"
+        [value]="check | lowercase"
         (change)="displayLimits()"
       >
         {{check}}
@@ -41,7 +41,7 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button value="Sauvegarder" color="accent" (click)="this.pointId ? editPoint(pointForm.value, pointId) : addPoint(pointForm.value)">Sauvegarder</button>    
+    <button mat-raised-button value="Sauvegarder" color="accent" (click)="writePoint(pointForm.value)">Sauvegarder</button>    
     <button mat-raised-button value="Close" (click)="close()">Close</button>
 </mat-dialog-actions>
 

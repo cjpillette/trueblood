@@ -21,9 +21,11 @@ export class DataPointsService {
   editing = false;
   modPoint = new BehaviorSubject<any>(null);
   user: any;
+  url: string;
 
   constructor(private afs: AngularFirestore) {
     this.user = firebase.auth().currentUser;
+    this.url = `users/${this.user.uid}/blood/`;
     if (this.user) {
       this.pointsCollection = this.afs
       .collection(`users/${this.user.uid}/blood/hem/results`, ref => ref.orderBy('date', 'desc'));
@@ -45,7 +47,7 @@ export class DataPointsService {
 
   getSinglePointOf(collection) {
     return this.afs
-      .collection(`users/${this.user.uid}/blood/${collection}/results`, ref => ref.limit(1))
+      .collection(`${this.url}${collection}/results`, ref => ref.limit(1))
       .snapshotChanges()
       .pipe(map(action => {
         return action.map(a => {
@@ -66,19 +68,13 @@ export class DataPointsService {
     return fullDataPoint;
   }
 
-  addPoint(point: Point) {
-    this.afs.collection(`users/${this.user.uid}/blood/${point.checktype.toLowerCase()}/results`)
+  writePoint(point: Point) {
+    if (point.id) {
+      return this.afs.doc(`${this.url}${point.checktype}/results/${point.id}`)
+      .update(this.getFullDataPoint(point));
+    }
+    return this.afs.collection(`${this.url}${point.checktype}/results`)
       .add(this.getFullDataPoint(point));
-  }
-
-  updatePoint(point: Point, pointId: PointId) {
-    this.pointDoc = this.afs.doc('users/${this.user.uid}/blood/hem/results/' + pointId);
-    this.pointDoc.update(this.getFullDataPoint(point));
-  }
-
-  editPoint(point: Point, pointId: PointId) {
-    this.editing = true;
-    this.modPoint.next({point, pointId});
   }
 
   deletePoint(pointId) {

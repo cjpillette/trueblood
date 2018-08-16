@@ -3,6 +3,8 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { Point, PointId } from '../data-points.model';
 import { DataPointsService } from '../data-points.service';
 import { PointsDataSource } from './data-datasource';
+import { DialogService } from './../dialog.service';
+import { DataFormComponent } from './../data-form/data-form.component';
 
 @Component({
   selector: 'app-data-table',
@@ -28,7 +30,7 @@ export class DataTableComponent implements OnInit , AfterViewInit {
     { name: 'Fer serique', checked: false }
   ];
 
-  constructor(private dataPointsService: DataPointsService) { }
+  constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort);
@@ -44,8 +46,9 @@ export class DataTableComponent implements OnInit , AfterViewInit {
     this.dataPointsService.deletePoint(pointId);
   }
 
-  updatePoint(point: Point, pointId: PointId) {
-    this.dataPointsService.editPoint(point, pointId);
+  updatePoint(point: Point) {
+    this.dialogService.openDialog(DataFormComponent, point);
+    // this.dataPointsService.editPoint(point, pointId);
   }
 
   updateTest(point) {

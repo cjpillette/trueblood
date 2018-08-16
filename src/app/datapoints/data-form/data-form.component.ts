@@ -13,48 +13,43 @@ export class DataFormComponent implements OnInit {
   pointForm: FormGroup;
   pointId: string;
   bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
-  condition = true;
+  editPoint: Point;
 
   constructor(
     private fb: FormBuilder,
     private dataPointsService: DataPointsService,
     private dialogRef: MatDialogRef<DataFormComponent>,
-        @Inject(MAT_DIALOG_DATA) data
-  ) {}
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.editPoint = data || {
+      checktype: '',
+      value: null,
+      date: null,
+      upperLimit: null,
+      lowerLimit: null,
+      unit: ''
+    };
+  }
 
   ngOnInit() {
     this.pointForm = this.fb.group({
-      checktype: ['', Validators.required],
-      value: [null,
+      checktype: [this.editPoint.checktype, Validators.required],
+      value: [this.editPoint.value,
         [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      date: [null,
+      date: [this.editPoint.date,
         [Validators.required,
         ]], // TODO: implement date validator
-      upperLimit: new FormControl(),
-      lowerLimit: new FormControl(),
-      unit: new FormControl()
+      upperLimit: [this.editPoint.upperLimit, [Validators.required]],
+      lowerLimit: [this.editPoint.lowerLimit, [Validators.required]],
+      unit: [this.editPoint.unit, [Validators.required]]
     });
-    this.dataPointsService.modPoint.subscribe(
-      data => {
-        if (data) {
-          this.pointForm.setValue({
-            'checktype': data.point.checktype,
-            'value': data.point.value,
-            'date': data.point.date,
-            'upperLimit': data.point.upperLimit,
-            'lowerLimit': data.point.lowerLimit,
-            'unit': data.point.unit
-          });
-          this.pointId = data.pointId;
-        }
-      }
-    );
+
   }
 
   displayLimits(): void {
     this.pointForm.get('checktype').valueChanges.subscribe(val => {
       this.dataPointsService
-        .getSinglePointOf(val.toLowerCase())
+        .getSinglePointOf(val)
         .subscribe(point => {
           const pt = Object.assign({}, ...point);
           return this.pointForm.patchValue({
@@ -79,13 +74,9 @@ export class DataFormComponent implements OnInit {
     return this.pointForm.get('date');
   }
 
-  addPoint(point: Point) {
-    this.dataPointsService.addPoint(point);
+  writePoint(point: Point) {
+    this.dataPointsService.writePoint(point);
     this.dialogRef.close();
-  }
-
-  editPoint(point: Point, pointId: PointId) {
-    this.dataPointsService.updatePoint(point, pointId);
   }
 
   close() {
