@@ -6,22 +6,38 @@
         *ngFor="let check of bloodChecks" 
         name="checktype"  
         [value]="check"
+        (change)="displayLimits()"
       >
         {{check}}
       </mat-radio-button>
     </mat-radio-group>
-    <br>
-    <mat-form-field>
-      <input matInput type="number" formControlName="value" placeholder="Valeur enregistree" name="value">
-    </mat-form-field>
-    <br>
+    <div class="container">
+      <div class="enter-data">
+        <mat-form-field>
+          <input matInput type="number" formControlName="value" placeholder="Valeur enregistree" name="value">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date"formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="check-against-data">
+        <mat-form-field>
+          <input matInput type="number" formControlName="upperLimit" placeholder="Limite superieure" name="upperLimit" autocomplete="upperLimit">
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput type="number" formControlName="lowerLimit" placeholder="Limite inferieure" name="lowerLimit" autocomplete="lowerLimit">
+        </mat-form-field>
     
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Date"formControlName="date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <br>
+        <mat-form-field>
+          <input matInput type="string" formControlName="unit" placeholder="Unite" name="unit" autocomplete="unit">
+        </mat-form-field>
+      </div>
+ 
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

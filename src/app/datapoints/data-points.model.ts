@@ -5,6 +5,7 @@ export interface Point {
   upperLimit?: number;
   lowerLimit?: number;
   unit?: string;
+  checktype?: string;
 }
 
 export interface PointId extends Point {

@@ -1,4 +1,4 @@
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { DataPointsService } from '../data-points.service';
 import { Point, PointId } from '../data-points.model';
@@ -13,6 +13,7 @@ export class DataFormComponent implements OnInit {
   pointForm: FormGroup;
   pointId: string;
   bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
+  condition = true;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +30,9 @@ export class DataFormComponent implements OnInit {
       date: [null,
         [Validators.required,
         ]], // TODO: implement date validator
+      upperLimit: new FormControl(),
+      lowerLimit: new FormControl(),
+      unit: new FormControl()
     });
     this.dataPointsService.modPoint.subscribe(
       data => {
@@ -36,12 +40,31 @@ export class DataFormComponent implements OnInit {
           this.pointForm.setValue({
             'checktype': data.point.checktype,
             'value': data.point.value,
-            'date': data.point.date
+            'date': data.point.date,
+            'upperLimit': data.point.upperLimit,
+            'lowerLimit': data.point.lowerLimit,
+            'unit': data.point.unit
           });
           this.pointId = data.pointId;
         }
       }
     );
+  }
+
+  displayLimits(): void {
+    this.pointForm.get('checktype').valueChanges.subscribe(val => {
+      this.dataPointsService
+        .getSinglePointOf(val.toLowerCase())
+        .subscribe(point => {
+          const pt = Object.assign({}, ...point);
+          return this.pointForm.patchValue({
+            'upperLimit': pt.upperLimit,
+            'lowerLimit': pt.lowerLimit,
+            'unit': pt.unit,
+          });
+      });
+    });
+
   }
 
   get checktype() {
@@ -58,20 +81,10 @@ export class DataFormComponent implements OnInit {
 
   addPoint(point: Point) {
     this.dataPointsService.addPoint(point);
-    this.clearForm();
   }
 
   editPoint(point: Point, pointId: PointId) {
     this.dataPointsService.updatePoint(point, pointId);
-    this.clearForm();
-  }
-
-  clearForm() {
-    this.pointForm.setValue({
-      'checktype': null,
-      'value': null,
-      'date': null
-    });
   }
 
   save() {
@@ -79,7 +92,6 @@ export class DataFormComponent implements OnInit {
   }
 
   close() {
-      this.dialogRef.close();
+    this.dialogRef.close();
   }
-
 }
