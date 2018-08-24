@@ -37,7 +37,7 @@ export class DataPointsService {
     );
   }
 
-  readSinglePointOf(collection) {
+  readSinglePointOf(collection: string) {
     return this.callToFirestore(
       `${this.url}${collection}/results`,
       ref => ref.limit(1)

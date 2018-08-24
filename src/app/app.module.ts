@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material';
 import { OignonComponent } from './oignon/oignon.component';
 import { DialogService } from './datapoints/dialog.service';
 import { DataTablesListComponent } from './datapoints/data-tables-list/data-tables-list.component';
+import { DataSelectionService } from './datapoints/data-selection.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { DataTablesListComponent } from './datapoints/data-tables-list/data-tabl
         { path: 'dashboard', component: DashboardComponent}
       ])
   ],
-  providers: [DataPointsService, DialogService],
+  providers: [DataPointsService, DialogService, DataSelectionService],
   bootstrap: [AppComponent],
   entryComponents: [DataFormComponent]
 })

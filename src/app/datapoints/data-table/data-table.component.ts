@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Point } from '../data-points.model';
 import { DataPointsService } from '../data-points.service';
@@ -14,9 +14,9 @@ import { DataFormComponent } from './../data-form/data-form.component';
 export class DataTableComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @Input() collection: string;
   dataSource: PointsDataSource;
   displayedColumns = ['date', 'value', 'update', 'delete'];
-  collection = 'hem';
 
   constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) { }
 

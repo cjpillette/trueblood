@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSelectionService } from './../data-selection.service';
 
 @Component({
   selector: 'app-data-tables-list',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data-tables-list.component.css']
 })
 export class DataTablesListComponent implements OnInit {
-  selectedChecks = [];
+  selection = [];
   bloodChecks = [
     { name: 'hem', checked: false },
     { name: 'hglb', checked: false },
@@ -18,15 +19,23 @@ export class DataTablesListComponent implements OnInit {
     { name: 'fer-serique', checked: false }
   ];
 
-  constructor() { }
+  constructor(private dataSelectionService: DataSelectionService) { }
 
   ngOnInit() {
   }
 
   showDataCollection(e, name) {
-    if (e.checked) {
-      console.log('name', name);
-    }
+    const selectionArray = [];
+      for (const value of this.bloodChecks) {
+        if (value.name === name) {
+          value.checked = e.checked;
+        }
+        selectionArray.push(value);
+      }
+      this.selection = selectionArray
+        .filter(a => a.checked)
+        .map(b => b.name);
+      this.dataSelectionService.showPointsFor(this.selection);
   }
 
 }
