@@ -18,7 +18,8 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   dataSource: PointsDataSource;
   displayedColumns = ['date', 'value', 'update', 'delete'];
 
-  constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) { }
+  constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) {
+  }
 
   ngOnInit() {
     this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort, this.collection);

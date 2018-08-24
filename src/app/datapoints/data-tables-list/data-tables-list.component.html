@@ -4,3 +4,5 @@
   (change)="showDataCollection($event, type.name)">{{ type.name | uppercase }}</mat-checkbox>
 
 <app-data-table *ngFor="let s of selection" [collection]="s"></app-data-table>
+
+<app-data-chart *ngFor="let s of selection" [collection]="s"></app-data-chart>

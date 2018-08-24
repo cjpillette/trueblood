@@ -1,5 +1,5 @@
+import { Component, OnInit, Input } from '@angular/core';
 import { DataPointsService } from '../data-points.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-data-chart',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data-chart.component.css']
 })
 export class DataChartComponent implements OnInit {
+  @Input() collection: string;
   lineChartData: Array<any>;
   lineChartLabels: Array<Date>;
   valuePoints: Array<number>;
   checkType: string;
   isDataAvailable = false;
   unit: string;
-  title = 'HEM';
 
   lineChartOptions = {
     scales: {
@@ -54,7 +54,10 @@ export class DataChartComponent implements OnInit {
   lineChartType = 'line';
 
   constructor(private dataPointsService: DataPointsService) {
-    this.dataPointsService.readPointsOf('hem').subscribe(
+  }
+
+  ngOnInit() {
+    this.dataPointsService.readPointsOf(this.collection).subscribe(
       val => {
         this.valuePoints = val.map(a => a.value);
         const datePoints = val.map(a => a.date);
@@ -72,9 +75,6 @@ export class DataChartComponent implements OnInit {
         this.isDataAvailable = true; // only now can you paint the chart
       }
     );
-  }
-
-  ngOnInit() {
   }
 
 }
