@@ -52,16 +52,16 @@ export class DataPointsService {
     return formattedPoint;
   }
 
-  writePoint(point: Point) {
-    if (point.id) {
-      return this.afs.doc(`${this.url}${point.checktype}/results/${point.id}`)
+  writePoint(point: Point, id?: string) {
+    if (id) {
+      return this.afs.doc(`${this.url}${point.checktype}/results/${id}`)
       .update(this.getFormattedDatePoint(point));
     }
     return this.afs.collection(`${this.url}${point.checktype}/results`)
       .add(this.getFormattedDatePoint(point));
   }
 
-  deletePoint(pointId) {
-    this.afs.doc('users/${this.user.uid}/blood/hem/results/' + pointId).delete();
+  deletePoint(collection, id) {
+    this.afs.doc(`users/${this.user.uid}/blood/${collection}/results/${id}`).delete();
   }
 }

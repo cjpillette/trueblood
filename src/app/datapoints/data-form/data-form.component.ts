@@ -11,7 +11,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class DataFormComponent implements OnInit {
   pointForm: FormGroup;
-  pointId: string;
   bloodChecks = ['HEM', 'HGLB', 'HTRC', 'VGM', 'TCMH', 'CCMH', 'Ferrite', 'Fer serique'];
   editPoint: Point;
 
@@ -59,7 +58,6 @@ export class DataFormComponent implements OnInit {
           });
       });
     });
-
   }
 
   get checktype() {
@@ -75,7 +73,7 @@ export class DataFormComponent implements OnInit {
   }
 
   writePoint(point: Point) {
-    this.dataPointsService.writePoint(point);
+    this.dataPointsService.writePoint(point, this.editPoint.id);
     this.dialogRef.close();
   }
 

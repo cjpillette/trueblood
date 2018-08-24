@@ -31,7 +31,7 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   }
 
   deletePoint(point: Point) {
-    // fix - reimplement delete
+    this.dataPointsService.deletePoint(point.checktype, point.id);
   }
 
   updatePoint(point: Point) {
