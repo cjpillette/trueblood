@@ -1,19 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { DataPointsService } from '../data-points.service';
+import * as Chart from 'chart.js';
 
 @Component({
   selector: 'app-data-chart',
   templateUrl: './data-chart.component.html',
   styleUrls: ['./data-chart.component.css']
 })
-export class DataChartComponent implements OnInit {
+export class DataChartComponent implements OnInit, AfterViewInit {
   @Input() collection: string;
+
   lineChartData: Array<any>;
   lineChartLabels: Array<Date>;
   valuePoints: Array<number>;
   checkType: string;
   isDataAvailable = false;
   unit: string;
+  chart: any;
+  ctx: any;
+  canvas: any;
 
   lineChartOptions = {
     scales: {
@@ -73,8 +78,32 @@ export class DataChartComponent implements OnInit {
         ];
         this.lineChartLabels = datePoints;
         this.isDataAvailable = true; // only now can you paint the chart
-      }
-    );
-  }
+      });
+    }
+
+  ngAfterViewInit() {
+    const canvas: any = document.getElementById('myChart');
+    const ctx = canvas.getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['New', 'In Progress', 'On Hold'],
+            datasets: [{
+                label: '# of Votes',
+                data: [1, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: false,
+        }
+      });
+    }
+
 
 }
