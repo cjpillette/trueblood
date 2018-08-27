@@ -53,6 +53,6 @@ import { TreatmentFormComponent } from './treatments/treatment-form/treatment-fo
       ])
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DataFormComponent]
+  entryComponents: [DataFormComponent, TreatmentFormComponent]
 })
 export class AppModule { }

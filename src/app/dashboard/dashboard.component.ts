@@ -1,6 +1,7 @@
-import { DataFormComponent } from './../datapoints/data-form/data-form.component';
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from './../datapoints/dialog.service';
+import { TreatmentFormComponent } from './../treatments/treatment-form/treatment-form.component';
+import { DataFormComponent } from './../datapoints/data-form/data-form.component';
 
 
 @Component({
@@ -15,8 +16,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog() {
+  openDataDialog() {
     this.dialogService.openDialog(DataFormComponent);
+  }
+
+  openTreatmentDialog() {
+    this.dialogService.openDialog(TreatmentFormComponent);
   }
 
 }

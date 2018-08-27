@@ -1,3 +1,33 @@
-<p>
-  treatment-form works!
-</p>
+<mat-dialog-content>
+    <form [formGroup]="treatmentForm">
+      <h2>Mes Traitements</h2>
+      <div class="container">
+          <mat-form-field>
+            <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" placeholder="Debut de traitement">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput [matDatepicker]="endDatePicker" placeholder="Fin de traitement" formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+          </mat-form-field>
+       
+          <mat-form-field>
+            <input matInput type="string" formControlName="title" placeholder="Titre du traitement" name="title" autocomplete="title">
+          </mat-form-field>
+      
+          <mat-form-field>
+            <input matInput type="string" formControlName="description" placeholder="Description du traitement" name="description" autocomplete="description">
+          </mat-form-field> 
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+      <button mat-raised-button value="Sauvegarder" color="accent" (click)="writePoint(treatmentForm.value)">Sauvegarder</button>    
+      <button mat-raised-button value="Close" (click)="close()">Close</button>
+  </mat-dialog-actions>
+  
+  
+  

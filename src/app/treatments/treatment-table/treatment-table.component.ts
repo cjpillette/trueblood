@@ -17,6 +17,7 @@ export class TreatmentTableComponent implements OnInit , AfterViewInit {
   @Input() collection: string;
   dataSource: TreatmentsDataSource;
   displayedColumns = ['startDate', 'endDate', 'title', 'description', 'update', 'delete'];
+  treatment = 'treatment';
 
   constructor(private treatmentsService: FirestoreTreatmentsService, private dialogService: DialogService) {
   }
@@ -35,7 +36,7 @@ export class TreatmentTableComponent implements OnInit , AfterViewInit {
   }
 
   updateTreatment(treatment: Treatment) {
-    this.dialogService.openDialog(TreatmentFormComponent, treatment, 'treatment');
+    this.dialogService.openDialog(TreatmentFormComponent, treatment, this.treatment);
   }
 
 }

@@ -17,6 +17,7 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   @Input() collection: string;
   dataSource: PointsDataSource;
   displayedColumns = ['date', 'value', 'update', 'delete'];
+  blood = 'blood';
 
   constructor(private bloodService: FirestoreBloodService, private dialogService: DialogService) {
   }
@@ -35,7 +36,7 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   }
 
   updatePoint(point: Point) {
-    this.dialogService.openDialog(DataFormComponent, point, 'blood');
+    this.dialogService.openDialog(DataFormComponent, point, this.blood);
   }
 
 }

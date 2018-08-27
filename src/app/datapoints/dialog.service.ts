@@ -14,9 +14,7 @@ export class DialogService {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
 
-    switch (from) {
-      case 'blood':
-      if (withData) { // in editing data mode
+      if (from === 'blood' && withData) { // in editing data mode
         dialogConfig.data = {
           id: withData.id,
           date: withData.date,
@@ -27,9 +25,8 @@ export class DialogService {
           checktype: withData.checktype
         };
       }
-      break;
-      case 'treatment':
-      if (withData) {
+
+      if (from === 'treatment' && withData) {
         dialogConfig.data = {
           id: withData.id,
           startDate: withData.startDate,
@@ -38,8 +35,6 @@ export class DialogService {
           description: withData.description
         };
       }
-      break;
-    }
 
     this.dialog.open(component, dialogConfig);
   }

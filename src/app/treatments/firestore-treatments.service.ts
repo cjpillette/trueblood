@@ -20,7 +20,7 @@ export class FirestoreTreatmentsService {
 
   readTreatments() {
     return this.afs
-    .collection(this.url, ref => ref.orderBy('date', 'desc'))
+    .collection(this.url, ref => ref.orderBy('startDate', 'desc'))
     .snapshotChanges()
     .pipe(map(action => {
       return action.map(a => {
