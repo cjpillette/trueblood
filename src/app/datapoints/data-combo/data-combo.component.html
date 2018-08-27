@@ -1,7 +1,12 @@
-<mat-checkbox
-  *ngFor="let type of bloodChecks" 
-  [checked]="type.checked"
-  (change)="showDataCollection($event, type.name)">{{ type.name | uppercase }}</mat-checkbox>
+<mat-card>
+  <mat-card-content>
+    <h2>Mes donnees sur le sang</h2>
+    <mat-checkbox
+      *ngFor="let type of bloodChecks" 
+      [checked]="type.checked"
+      (change)="showDataCollection($event, type.name)">{{ type.name | uppercase }}</mat-checkbox>
+  </mat-card-content>
+</mat-card>
 
 <app-data-table *ngFor="let s of selection" [collection]="s"></app-data-table>
 

@@ -1,6 +1,12 @@
 <button (click)="openDataDialog()">ENTRER UNE DONNEE</button>
-<button (click)="openTreatmentDialog()">ENTRER UNE TRAITEMENT</button>
-<br>
-<app-data-combo></app-data-combo>
-<br>
-<app-treatment-table></app-treatment-table>
+<button (click)="openTreatmentDialog()">ENTRER UN TRAITEMENT</button>
+<button (click)="showTreatments()">
+  {{ treatmentsVisible ? 'Minimiser mes donnees sur mes traitements' : 'Voir tous mes traitements' }}
+</button>
+<button (click)="showBloodWork()">
+    {{ bloodworkVisible ? 'Minimiser mes donnees sur le sang' : 'Voir tous mes donnees sur le sang' }}
+</button>
+
+<app-data-combo *ngIf="bloodworkVisible"></app-data-combo>
+
+<app-treatment-table *ngIf="treatmentsVisible"></app-treatment-table>

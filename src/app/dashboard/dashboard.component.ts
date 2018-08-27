@@ -10,6 +10,8 @@ import { DataFormComponent } from './../datapoints/data-form/data-form.component
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  treatmentsVisible = false;
+  bloodworkVisible = false;
 
   constructor( private dialogService: DialogService) { }
 
@@ -22,6 +24,14 @@ export class DashboardComponent implements OnInit {
 
   openTreatmentDialog() {
     this.dialogService.openDialog(TreatmentFormComponent);
+  }
+
+  showTreatments() {
+    this.treatmentsVisible = !this.treatmentsVisible;
+  }
+
+  showBloodWork() {
+    this.bloodworkVisible = !this.bloodworkVisible;
   }
 
 }
