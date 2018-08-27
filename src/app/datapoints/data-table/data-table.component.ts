@@ -35,7 +35,7 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   }
 
   updatePoint(point: Point) {
-    this.dialogService.openDialog(DataFormComponent, point);
+    this.dialogService.openDialog(DataFormComponent, point, 'blood');
   }
 
 }

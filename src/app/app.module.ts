@@ -19,6 +19,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material';
 import { OignonComponent } from './oignon/oignon.component';
 import { DataComboComponent } from './datapoints/data-combo/data-combo.component';
+import { TreatmentTableComponent } from './treatments/treatment-table/treatment-table.component';
+import { TreatmentFormComponent } from './treatments/treatment-form/treatment-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { DataComboComponent } from './datapoints/data-combo/data-combo.component
     UserProfileComponent,
     DashboardComponent,
     OignonComponent,
-    DataComboComponent
+    DataComboComponent,
+    TreatmentFormComponent,
+    TreatmentTableComponent
   ],
   imports: [
     BrowserModule,

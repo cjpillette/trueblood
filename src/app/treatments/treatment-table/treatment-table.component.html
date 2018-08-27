@@ -1,0 +1,55 @@
+<mat-spinner *ngIf="dataSource.loading$ | async"></mat-spinner>
+
+<mat-card>
+  <mat-card-header>Traitements</mat-card-header>
+  <mat-card-content>
+    <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+      <!-- Start Date Column -->
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de commencement</th>
+        <td mat-cell *matCellDef="let row">{{row.startDate | date:'MM/yyyy'}}</td>
+      </ng-container>
+
+      <!-- End Date Column -->
+      <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Date d'aboutissement</th>
+          <td mat-cell *matCellDef="let row">{{row.endDate | date:'MM/yyyy'}}</td>
+        </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type de traitement</th>
+        <td mat-cell *matCellDef="let row">{{row.title}}</td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description du traitement</th>
+          <td mat-cell *matCellDef="let row">{{row.description}}</td>
+        </ng-container>
+
+      <!-- Update Column -->
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row" (click)="updateTreatment(row)"><mat-icon>edit</mat-icon></td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row" (click)="deleteTreatment(row)"><mat-icon>delete</mat-icon></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #paginator
+      [length]="dataSource.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 25, 50]">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>
+
