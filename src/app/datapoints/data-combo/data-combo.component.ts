@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSelectionService } from './../data-selection.service';
+import { DataSelectionService } from '../data-selection.service';
 
 @Component({
-  selector: 'app-data-tables-list',
-  templateUrl: './data-tables-list.component.html',
-  styleUrls: ['./data-tables-list.component.css']
+  selector: 'app-data-combo',
+  templateUrl: './data-combo.component.html',
+  styleUrls: ['./data-combo.component.css']
 })
-export class DataTablesListComponent implements OnInit {
+export class DataComboComponent implements OnInit {
   selection = [];
   bloodChecks = [
     { name: 'hem', checked: false },

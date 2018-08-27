@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { DataPointsService } from './data-points.service';
+import { FirestoreBloodService } from './firestore-blood.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DataSelectionService {
 
-  constructor(private dataPointsService: DataPointsService) {
+  constructor(private bloodService: FirestoreBloodService) {
   }
 
   showPointsFor(selection: Array<string>) {
     for (const collection of selection) {
-      this.dataPointsService.readPointsOf(collection);
+      this.bloodService.readPointsOf(collection);
     }
   }
 }

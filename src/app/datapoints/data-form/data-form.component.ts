@@ -1,6 +1,6 @@
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject } from '@angular/core';
-import { DataPointsService } from '../data-points.service';
+import { FirestoreBloodService } from '../firestore-blood.service';
 import { Point } from '../data-points.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
@@ -16,7 +16,7 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dataPointsService: DataPointsService,
+    private bloodService: FirestoreBloodService,
     private dialogRef: MatDialogRef<DataFormComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
@@ -47,7 +47,7 @@ export class DataFormComponent implements OnInit {
 
   displayLimits(): void {
     this.pointForm.get('checktype').valueChanges.subscribe(val => {
-      this.dataPointsService
+      this.bloodService
         .readSinglePointOf(val)
         .subscribe(point => {
           const pt = Object.assign({}, ...point);
@@ -73,7 +73,7 @@ export class DataFormComponent implements OnInit {
   }
 
   writePoint(point: Point) {
-    this.dataPointsService.writePoint(point, this.editPoint.id);
+    this.bloodService.writePoint(point, this.editPoint.id);
     this.dialogRef.close();
   }
 

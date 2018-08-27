@@ -6,8 +6,10 @@ import * as firebase from 'firebase/app';
 import { Point } from './data-points.model';
 import { map } from 'rxjs/operators';
 
-@Injectable()
-export class DataPointsService {
+@Injectable({
+  providedIn: 'root'
+})
+export class FirestoreBloodService {
   user: any;
   url: string;
 

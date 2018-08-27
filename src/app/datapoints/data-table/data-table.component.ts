@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { Point } from '../data-points.model';
-import { DataPointsService } from '../data-points.service';
+import { FirestoreBloodService } from '../firestore-blood.service';
 import { PointsDataSource } from './data-datasource';
 import { DialogService } from './../dialog.service';
 import { DataFormComponent } from './../data-form/data-form.component';
@@ -18,11 +18,11 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   dataSource: PointsDataSource;
   displayedColumns = ['date', 'value', 'update', 'delete'];
 
-  constructor(private dataPointsService: DataPointsService, private dialogService: DialogService) {
+  constructor(private bloodService: FirestoreBloodService, private dialogService: DialogService) {
   }
 
   ngOnInit() {
-    this.dataSource = new PointsDataSource(this.dataPointsService, this.paginator, this.sort, this.collection);
+    this.dataSource = new PointsDataSource(this.bloodService, this.paginator, this.sort, this.collection);
   }
 
   ngAfterViewInit() {
@@ -31,12 +31,11 @@ export class DataTableComponent implements OnInit , AfterViewInit {
   }
 
   deletePoint(point: Point) {
-    this.dataPointsService.deletePoint(point.checktype, point.id);
+    this.bloodService.deletePoint(point.checktype, point.id);
   }
 
   updatePoint(point: Point) {
     this.dialogService.openDialog(DataFormComponent, point);
-    // check it rewrites ok in firestore
   }
 
 }

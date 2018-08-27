@@ -3,7 +3,7 @@ import { DataSource, CollectionViewer } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { map, finalize, catchError } from 'rxjs/operators';
 import { Observable, merge, BehaviorSubject, of } from 'rxjs';
-import { DataPointsService } from '../data-points.service';
+import { FirestoreBloodService } from '../firestore-blood.service';
 
 export class PointsDataSource extends DataSource<Point> {
   pointsSubject = new BehaviorSubject<Point[]>([]);
@@ -12,10 +12,10 @@ export class PointsDataSource extends DataSource<Point> {
   public loading$ = this.loadingSubject.asObservable();
 
   constructor(
-    private dataPointsService: DataPointsService, public paginator: MatPaginator, public sort: MatSort, private collection: string
+    private bloodService: FirestoreBloodService, public paginator: MatPaginator, public sort: MatSort, private collection: string
   ) {
     super();
-    this.dataPointsService.readPointsOf(collection)
+    this.bloodService.readPointsOf(collection)
     .pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false)))

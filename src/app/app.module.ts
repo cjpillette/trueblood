@@ -13,15 +13,12 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { DataFormComponent } from './datapoints/data-form/data-form.component';
 import { DataTableComponent } from './datapoints/data-table/data-table.component';
-import { DataPointsService } from './datapoints/data-points.service';
 import { DataChartComponent } from './datapoints/data-chart/data-chart.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatNativeDateModule } from '@angular/material';
 import { OignonComponent } from './oignon/oignon.component';
-import { DialogService } from './datapoints/dialog.service';
-import { DataTablesListComponent } from './datapoints/data-tables-list/data-tables-list.component';
-import { DataSelectionService } from './datapoints/data-selection.service';
+import { DataComboComponent } from './datapoints/data-combo/data-combo.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +30,7 @@ import { DataSelectionService } from './datapoints/data-selection.service';
     UserProfileComponent,
     DashboardComponent,
     OignonComponent,
-    DataTablesListComponent
+    DataComboComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +48,6 @@ import { DataSelectionService } from './datapoints/data-selection.service';
         { path: 'dashboard', component: DashboardComponent}
       ])
   ],
-  providers: [DataPointsService, DialogService, DataSelectionService],
   bootstrap: [AppComponent],
   entryComponents: [DataFormComponent]
 })

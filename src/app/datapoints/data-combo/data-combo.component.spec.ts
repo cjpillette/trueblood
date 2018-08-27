@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataTablesListComponent } from './data-tables-list.component';
+import { DataComboComponent } from './data-combo.component';
 
 describe('DataTablesListComponent', () => {
-  let component: DataTablesListComponent;
-  let fixture: ComponentFixture<DataTablesListComponent>;
+  let component: DataComboComponent;
+  let fixture: ComponentFixture<DataComboComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataTablesListComponent ]
+      declarations: [ DataComboComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataTablesListComponent);
+    fixture = TestBed.createComponent(DataComboComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

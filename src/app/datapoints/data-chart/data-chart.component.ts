@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { DataPointsService } from '../data-points.service';
+import { FirestoreBloodService } from '../firestore-blood.service';
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
 
@@ -15,7 +15,7 @@ export class DataChartComponent implements OnInit, AfterViewInit {
 
 
 
-  constructor(private dataPointsService: DataPointsService) {
+  constructor(private bloodService: FirestoreBloodService) {
   }
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class DataChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     const canvas: any = document.getElementById('myChart');
     const ctx = canvas.getContext('2d');
-    this.dataPointsService.readPointsOf(this.collection).subscribe(
+    this.bloodService.readPointsOf(this.collection).subscribe(
       val => {
         this.valuePoints = val.map(a => a.value);
         const datePoints = val.map(a => a.date);
