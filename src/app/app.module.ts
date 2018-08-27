@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { ChartsModule } from 'ng2-charts';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 
@@ -45,7 +44,6 @@ import { DataSelectionService } from './datapoints/data-selection.service';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ChartsModule,
     CoreModule,
     RouterModule.forRoot(
       [
