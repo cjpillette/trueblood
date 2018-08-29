@@ -1,9 +1,9 @@
-<button (click)="openDataDialog()">ENTRER UNE DONNEE</button>
-<button (click)="openTreatmentDialog()">ENTRER UN TRAITEMENT</button>
-<button (click)="showTreatments()">
+<button mat-raised-button (click)="openDataDialog()">ENTRER UNE DONNEE</button>
+<button mat-raised-button (click)="openTreatmentDialog()">ENTRER UN TRAITEMENT</button>
+<button mat-raised-button color="primary" (click)="showTreatments()">
   {{ treatmentsVisible ? 'Minimiser mes donnees sur mes traitements' : 'Voir tous mes traitements' }}
 </button>
-<button (click)="showBloodWork()">
+<button mat-raised-button color="primary" (click)="showBloodWork()">
     {{ bloodworkVisible ? 'Minimiser mes donnees sur le sang' : 'Voir tous mes donnees sur le sang' }}
 </button>
 

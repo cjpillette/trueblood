@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <form [formGroup]="pointForm">
-    <label for="checktype">Type de donnee</label><br>
+    <h2>Une nouvelle donnee</h2>
     <mat-radio-group formControlName="checktype">
       <mat-radio-button 
         *ngFor="let check of bloodChecks" 

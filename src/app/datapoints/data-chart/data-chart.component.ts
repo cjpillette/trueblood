@@ -13,8 +13,6 @@ export class DataChartComponent implements OnInit, AfterViewInit {
   valuePoints: Array<number>;
   unit: string;
 
-
-
   constructor(private bloodService: FirestoreBloodService) {
   }
 
@@ -33,22 +31,29 @@ export class DataChartComponent implements OnInit, AfterViewInit {
         const unitArray = val.map(a => a.unit);
         this.unit = Array.from(new Set(unitArray)).join(' ');
 
+        const spec = upperLimit[0] - lowerLimit[0];
+        const highestPoint = Math.max(...this.valuePoints);
+        const lowestPoint = Math.min(...this.valuePoints);
+
         const dates = [];
         datePoints.forEach( res => {
             dates.push(moment(res).locale('fr').format('YYYY-MM-DD'));
           });
 
         const myChart = new Chart(ctx, {
-          type: 'bar',
+          type: 'line',
           data: {
             labels: dates,
             datasets: [
               {
-                type: 'bar',
+                type: 'line',
                 label: 'Traitements',
-                data: [100, 0, 100, 0, 0, 0, 0],
-                backgroundColor: 'rgba(0, 0, 0, 1)',
-                borderWidth: 0,
+                data: [7, 7, 7],
+                borderWidth: 8,
+                xAxisID: 'value-time',
+                yAxisID: 'value-amount',
+                backgroundColor: 'transparent',
+                pointRadius: 0
               },
               {
                 type: 'line',
@@ -93,6 +98,12 @@ export class DataChartComponent implements OnInit, AfterViewInit {
             legend: {
               display: false
               },
+            events: ['click', 'touchstart', 'touchend'],
+            onClick: function(e) {
+              const xLabel = this.scales['value-time'].getValueForPixel(e.offsetX);
+              console.log(xLabel.format('MMM YYYY'));
+              console.log('e', e);
+            },
             scales: {
               xAxes: [
                 {
@@ -118,7 +129,8 @@ export class DataChartComponent implements OnInit, AfterViewInit {
                   display: true,
                   ticks: {
                     beginAtZero: false,
-                                max: 7.5
+                    max: Math.max(+upperLimit[0] + spec, highestPoint + 1),
+                    min: Math.min(+lowerLimit[0] + spec, lowestPoint - 1)
                   }
                 },
               ]
@@ -136,6 +148,5 @@ export class DataChartComponent implements OnInit, AfterViewInit {
       });
     });
   }
-
 
 }
